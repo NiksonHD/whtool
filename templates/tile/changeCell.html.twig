@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <body onload="document.getElementById('search_input').focus()">
+
+        <div class="body-content">
+
+    {% if (error) %}
+        <div class="row">
+            <span class="col-md-offset-5 alert alert-warning" role="alert">{{ error }}</span>
+        </div>
+    {% endif %}
+    <div class="row">
+        {% if app.user %}
+
+            <a class="btn btn-default btn-xs" href="{{ path('my_searches') }}" >
+                My searches
+            </a>
+
+        {% endif %}
+
+        {% for field in tiles %}
+            <div class="col-md-12">
+                {% if ((field.sapNum) and null is not sameas(map)) %}
+                    <p>
+                        Артикул:  {{ field.sapNum }}
+                        {{ field.articleName }}
+                    </p>
+
+                    <p> 
+                        беше записан в клетка: {{ map.tileCell }}
+
+
+                    </p>
+
+
+
+
+                    <hr>
+
+                {% endif %}
+                </article>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+
+    <form class="form-horizontal" action="{{ path('change_tile_adress') }}" method="POST">
+        {% if evaluation.category.name is defined %}
+            {{evaluation.category.name}}
+        {% endif %}
+        <table>
+
+
+            <tr>
+                <th  style="color:blue">СКАНИРАЙ КЛЕТКА</th>
+                <td >
+
+                    <input id="search_input" 
+                           type="text" name="map[tileCell]" /></td>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <button type="submit" class="btn btn-primary">НАПРЕД</button>
+                </td>
+            </tr>
+        </table>
+        {{  form_row(form._token) }}  
+
+
+    </form>
+
+    <div class="container body-content">
+        <div class="row">
+
+        </div>
+        
+    </div>
+    </div>
+
+
+{% endblock %}

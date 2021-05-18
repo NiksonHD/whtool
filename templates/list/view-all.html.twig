@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <div class="body-content">
+
+    {#    <button class="btn btn-default btn-xs" onclick="document.location = {{ path('create_list') }}" type="button">Направи списък</button>#}
+    <p>
+        <button onclick="document.location = '{{ path("make_list") }}'" type="button">Направи списък</button>
+        </p>
+
+    <form class="form-horizontal" action="{{ path('find-lists-date') }}" method="POST">
+        {% if evaluation.category.name is defined %}
+            {{evaluation.category.name}}
+        {% endif %}
+        <lable>
+            Търсене по дата на лист:
+
+            <input id="search_input" title=" Примери за списъци:
+                   494001.3.494002.12;
+                   494001.494002.494003" type="date" name="date_search" autofocus/></td>
+        </lable>
+        <button type="submit" class="btn btn-primary btn-xs">Търси</button>
+    </form>
+    <hr>
+    <div class="container body-container">
+        {% for list in lists %}
+            <div class="">
+
+                <p>
+                    <a href="{{ path('view-one' ,{id: list.id}) }}" title='Натисни за подробности.'>{{ list.nameList|date("d/m/Y - H:i:s") }}
+                    {{ list.comment }}</a>
+{#                    <a href="{{ path('view-one' ,{id: list.id}) }}" title='Натисни за подробности.'>Подробен</a>#}
+
+                </p>     
+
+                <hr>
+            </div>
+
+
+    {% endfor %}
+            </div>
+
+
+    
+    </div>
+
+
+    {{  form_row(form._token) }}  
+
+
+{% endblock %}

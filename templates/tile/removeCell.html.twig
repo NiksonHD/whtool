@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="body-content">
+
+
+    <div class="btn btn-danger">
+    ТРИЕНЕ !!!!!!
+
+    </div>
+
+
+    <form class="form-horizontal" action="{{ path('remove-cell') }}" method="POST">
+        {% if evaluation.category.name is defined %}
+            {{evaluation.category.name}}
+        {% endif %}
+        <table>
+
+
+            <tr>
+                <th  style="color:blue">СКАНИРАЙ КЛЕТКА</th>
+                <td >
+
+                    <input id="search_input" 
+                           type="text" name="map[tileCell]" autofocus/></td>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <button type="submit" class="btn btn-primary">НАПРЕД</button>
+                </td>
+            </tr>
+        </table>
+        {{  form_row(form._token) }}  
+
+
+    </form>
+
+    
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <body onload="document.getElementById('search_input').focus()">
+
+            <div class="body-content">
+
+{% if (error) %}
+        <div class="row">
+            <span class="col-md-offset-5 alert alert-warning" role="alert">{{ error }}</span>
+        </div>
+    {% endif %}
+
+    <div class="row">
+
+        {% for field in tiles %}
+            <div class="col-md-12">
+
+                <p>
+                    Записваш:  {{ field.articleNum }}
+                    {{ field.articleName }} в
+                </p>
+
+
+
+
+                <hr>
+
+                </article>
+            </div>
+
+       
+
+    </div>
+
+
+    <form class="form-horizontal" action="{{ path('changeArticleFromFind') }}" method="POST">
+        
+        <table>
+
+            
+            <tr>
+                <th>  </th>
+                <td>
+                    <input 
+                           type="hidden" name="map[sapNum]" value="{{ field.articleNum }}"/></td>
+            </tr>
+
+            <tr>
+                <th  style="color:blue">СКАНИРАЙ КЛЕТКА</th>
+                <td >
+
+                    <input id="search_input" 
+                           type="text" name="map[tileCell]" /></td>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <button type="submit" class="btn btn-primary">НАПРЕД</button>
+                </td>
+            </tr>
+        </table>
+        {{  form_row(form._token) }}  
+
+
+    </form>
+         {% endfor %}
+    <div class="container body-content">
+        <div class="row">
+
+        </div>
+       
+
+    </div>
+    </div>
+
+
+{% endblock %}

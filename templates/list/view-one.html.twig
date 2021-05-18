@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <body onload="document.getElementById('search_input').focus()">
+    <div class="body-content">
+
+    <form class="form-horizontal" action="{{ path('find-lists-date') }}" method="POST">
+        {% if evaluation.category.name is defined %}
+            {{evaluation.category.name}}
+        {% endif %}
+
+        <span>ОТИДИ НА:</span>
+
+        <input id="search_input" style="width:205px" type="text" name="lists[nameList]"  />
+
+
+        <span style="color:red" >{{ list.error1 is not null ? 'Грешка!!!' : '' }}</span>
+
+        <button class="btn btn-default btn-xs" type="submit" name="save" value="1" >ЗАПИШИ</button>
+
+
+        </form>
+
+       
+
+    
+
+    {{  form_row(form._token) }}  
+
+
+
+
+    <div class="row">
+        <hr>
+        {% if (list) %}
+            {#                    {% for field in list%}#}
+            <div class="col-md-12">
+                <p>
+                    Номер на списък: {{ list.nameList|date("d/m/Y - H:i:s") }}
+
+                </p>
+                <p>
+                    "{{ list.comment }},({{ list.deviceZone }})"
+                </p>
+                <hr>
+                 {% if (tiles) %}
+                    {% for tile in tiles%}
+                        <div class="output">
+                            <article>
+                <header>
+                    <h2> 
+                        {% if ( tile.articleNum )  %} 
+                            Артикул:&nbsp;<a target='_blank' href="https://praktiker.bg/bg/bg/Stolove/TRAPEZEN-STOL-LILOVI-KROS-2-VENGE/p/{{ tile.articleNum }}" > {{ tile.articleNum }} </a>
+                        {% else %}
+                            {{ 'Невалидни данни за търсене!' }}
+
+                        {% endif %} 
+
+
+
+
+
+
+                    </h2>
+                </header>
+
+                <p>
+                    {{ tile.articleName }}
+                </p>
+                <p>
+                    EAN: &nbsp;{{ tile.ean}}
+                </p>
+                <p>
+                    наличност: &nbsp;{{ tile.quantity}} бр., актуални към: &nbsp; {{ tile.updateDate|date("d/m/Y - H:i:s") }}
+                </p>
+                <p>клетки:&nbsp; 
+                    {% if (tile.cells) %}
+
+                        {% for cell in tile.cells%}
+
+                            <small>
+                                <a href="{{ path('changeCellFromFind' ,{cell: cell.tileCell }) }}" title='Последно записване в клетката:{{ cell.updateDate|date("d/m/Y - H:i:s") }}'>#({{ cell.tileCell }}),</a>
+                            </small> 
+
+                        {% endfor %} 
+                    {% else %}
+                        <small>
+                            Няма намерени клетки!
+                        </small>
+                    {% endif %}
+                </p>
+                <p>
+                   За тумкане: {{tile.order  }} бр.
+                </p>
+
+                <hr>
+
+
+                </article>
+            </div>
+
+                                {% endfor %}
+        {% endif %}
+        {% endif %}
+    </div>
+
+   
+</div>    
+</div>    
+
+
+
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="body-content">
+
+        {% if errors %}
+            {% for error in errors %}
+                <small class="exception-message"> {{ error.message }}</small>
+            {% endfor %}
+        {% endif %}
+
+        <form class="form-horizontal" action="{{ path('make_list') }}" method="POST">
+            {% if evaluation.category.name is defined %}
+                {{evaluation.category.name}}
+            {% endif %}
+            <table style="width:55%">
+                <tr>
+                    <th>
+
+                    </th>
+                </tr>
+
+
+                <tr >
+                    <td style="font-size: 23px">1:<input id="search_input" style="width:105px" type="text" name="lists[sap1]" placeholder="Артикул" value ="{{ list.sap1 }}" /> </td>
+                    <td style="font-size: 20px"> x
+                        <input id="search_input" style="width:45px;" type="text" name="lists[q1]" /> бр.
+
+                        <span style="color:red" >{{ list.error1 is not null ? 'Грешка!!!' : '' }}</span>
+                    </td>
+                </tr>
+                <tr >
+                    <td style="font-size: 23px">2:<input id="search_input" style="width:105px" type="text" name="lists[sap2]"  placeholder="Артикул" value ="{{ list.sap2 }}" /></td>
+                    <td style="font-size: 20px"> x
+                        <input id="search_input" style="width:45px;" type="text" name="lists[q2]" /> бр.
+                        <span style="color:red" >{{ list.error2 is not null ? 'Грешка!!!' : '' }}</span>
+                    </td>
+
+                </tr>
+                <tr >
+                    <td style="font-size: 23px">3:<input  id="search_input" style="width:105px" type="text" name="lists[sap3]"  placeholder="Артикул" value ="{{ list.sap3 }}"/></td>
+                    <td style="font-size: 20px"> x
+                        <input id="search_input" style="width:45px;" type="text" name="lists[q3]" /> бр.
+                        <span style="color:red" >{{ list.error3 is not null ? 'Грешка!!!' : '' }}</span>
+                    </td>
+                </tr>
+                <tr >
+                    <td style="font-size: 23px">4:<input id="search_input" style="width:105px" type="text" name="lists[sap4]"  placeholder="Артикул" value ="{{ list.sap4 }}" /></td>
+                    <td style="font-size: 20px"> x
+                        <input id="search_input" style="width:45px;" type="text" name="lists[q4]" /> бр.
+                        <span style="color:red" >{{ list.error4 is not null ? 'Грешка!!!' : '' }}</span>
+                    </td>
+                </tr>
+                <tr >
+                    <td style="font-size: 23px">5:<input id="search_input" style="width:105px" type="text" name="lists[sap5]"  placeholder="Артикул" value ="{{ list.sap5 }}" /></td>
+                    <td style="font-size: 20px"> x
+                        <input id="search_input" style="width:45px;" type="text" name="lists[q5]" /> бр.
+                        <span style="color:red" >{{ list.error5 is not null ? 'Грешка!!!' : '' }}</span>
+                    </td>
+                </tr>
+                <tr >
+                    <td style="font-size: 23px">6:<input id="search_input" style="width:105px" type="text" name="lists[sap6]"  placeholder="Артикул" value ="{{ list.sap6 }}" /></td>
+                    <td style="font-size: 20px"> x
+                        <input id="search_input" style="width:45px;" type="text" name="lists[q6]" /> бр.
+                        <span style="color:red" >{{ list.error6 is not null ? 'Грешка!!!' : '' }}</span>
+                    </td>
+
+                </tr>
+                <tr >
+                    <td style="font-size: 23px">7:<input id="search_input" style="width:105px" type="text" name="lists[sap7]"  placeholder="Артикул" value ="{{ list.sap7 }}"/></td>
+                    <td style="font-size: 20px"> x
+                        <input id="search_input" style="width:45px;" type="text" name="lists[q7]" /> бр.
+                        <span style="color:red" >{{ list.error7 is not null ? 'Грешка!!!' : '' }}</span>
+                    </td>
+
+                </tr>
+                <tr >
+                    <td style="font-size: 23px">8:<input id="search_input" style="width:105px" type="text" name="lists[sap8]"  placeholder="Артикул" value ="{{ list.sap8 }}" /></td>
+                    <td style="font-size: 20px"> x
+                        <input id="search_input" style="width:45px;" type="text" name="lists[q8]" /> бр.
+                        <span style="color:red" >{{ list.error8 is not null ? 'Грешка!!!' : '' }}</span>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+                    <th style="font-size: 28px">Коментар</th>
+                    <td>
+                        <div>
+                            <input  title="Добавянето на име към коментара помага на склада!" type="text" name="lists[comment]" /><br>
+                            {#                            <span style="color:red">{{ errors is not null ? 'Грешка!!!' : '' }}</span>#}
+                            <span style="color:red">
+                                {% for error in errors %}
+                                    {{ error.message }}
+                                    {% endfor %}
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-default btn-xs" type="submit" name="save" value="1" >ЗАПИШИ</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="container body-content">
+                <div class="row">
+
+                </div>
+
+            </div>
+
+
+    </div>
+</div>
+
+{{  form_row(form._token) }}  
+
+
+</form>
+{% endblock %}

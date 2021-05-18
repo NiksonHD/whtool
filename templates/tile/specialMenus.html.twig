@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="body-content">
+
+        <div class="row">
+            <a class="btn btn-success btn-xs" href="{{ path('multi-change-cell') }}">Мулти променяне &raquo;</a>
+        </div>
+        <hr>
+        <div class="row">
+            <a class="btn btn-success btn-xs" href="{{ path('remove-cell') }}">Изтрий артикул&raquo;</a>
+        </div>
+        
+        <hr>
+
+        <div class="row">
+            <a class="btn btn-success btn-xs" href="{{ path('login') }}">Влез в профил&raquo;</a>
+        </div>
+        <hr>
+
+        <div class="row">
+            <a class="btn btn-success btn-xs" href="{{ path('register') }}">Направи профил&raquo;</a>
+        </div>
+
+            <div class="row">
+
+            </div>
+            
+
+
+    {% endblock %}

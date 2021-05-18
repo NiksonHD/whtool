@@ -1,0 +1,72 @@
+{% block body %}
+
+   
+
+
+<div class="body-content">
+    <div class="row">
+        {% if (list) %}
+            {#                    {% for field in list%}#}
+            <div class="col-md-12">
+               
+                <hr>
+                 {% if (tiles) %}
+                    {% for tile in tiles%}
+                        <div class="col-md-12">
+                            <article>
+                    <p> 
+                        {% if ( tile.articleNum )  %} 
+                            Артикул:&nbsp;<a target='_blank' href="https://praktiker.bg/bg/bg/Stolove/TRAPEZEN-STOL-LILOVI-KROS-2-VENGE/p/{{ tile.articleNum }}" > {{ tile.articleNum }} </a>
+                        {% else %}
+                            {{ 'Невалидни данни за търсене!' }}
+
+                        {% endif %} 
+
+
+                    {{ tile.articleName }}
+                    </p>
+                    <p>
+                        
+                    EAN: &nbsp;{{ tile.ean}}
+                    </p>
+                    <p>
+                    наличност: &nbsp;{{ tile.quantity}} бр., актуални към: &nbsp; {{ tile.updateDate|date("d/m/Y - H:i:s") }}
+                    </p>
+                    <p>
+                клетки:&nbsp; 
+                    {% if (tile.cells) %}
+
+                        {% for cell in tile.cells%}
+
+                            <small>
+                                <a href="{{ path('changeCellFromFind' ,{cell: cell.tileCell }) }}" title='Последно записване в клетката:{{ cell.updateDate|date("d/m/Y - H:i:s") }}'>#({{ cell.tileCell }}),</a>
+                            </small> 
+
+                        {% endfor %} 
+                    {% else %}
+                        <small>
+                            Няма намерени клетки!
+                        </small>
+                    {% endif %}
+                    </p>
+                    <p>
+                    За тумкане: {{tile.order  }} бр. <input type="checkbox"/>
+                </p>
+
+                <hr>
+
+
+                </article>
+            </div>
+
+                                {% endfor %}
+        {% endif %}
+        {% endif %}
+    </div>
+
+   
+</div>    
+
+
+
+{% endblock %}

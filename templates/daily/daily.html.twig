@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <div class="body-content">
+
+    {#    <button class="btn btn-default btn-xs" onclick="document.location = {{ path('create_list') }}" type="button">Направи списък</button>#}
+
+    {#<form class="form-horizontal" action="{{ path('find-lists-date') }}" method="POST">
+        {% if evaluation.category.name is defined %}
+            {{evaluation.category.name}}
+        {% endif %}
+        <lable>
+            Търсене по дата на лист:
+
+            <input id="search_input" title=" Примери за списъци:
+                   494001.3.494002.12;
+                   494001.494002.494003" type="text" name="tile[sapNum]" autofocus/></td>
+        </lable>
+        <button type="submit" class="btn btn-primary btn-xs">Търси</button>
+    </form>#}
+    <hr>
+    <div class="container body-container">
+            <div class="">
+                {% for field in dailys %}
+                <p>
+{#                    {{ list.nameList|date("d/m/Y - H:i:s") }}#}
+                    <a href="{{ path('tile' , {id: field.article.id}) }}" title='Натисни за подробности.'>{{ field.inputDate|date("H:i") }}  -  {{field.article.articleNum}} {{field.article.articleName}} ({{ field.deviceZone }})</a>
+
+                </p>     
+
+                <hr>
+                {% endfor %}
+            </div>
+
+
+            </div>
+
+
+    
+    </div>
+
+
+    {{  form_row(form._token) }}  
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+            <div class="body-content">
+
+    {#    <button class="btn btn-default btn-xs" onclick="document.location = {{ path('create_list') }}" type="button">Направи списък</button>#}
+
+    <form class="form-horizontal" action="{{ path('show-last-changes') }}" method="POST">
+        
+        <lable>
+            Търсене по дата:
+
+            <input id="search_input" type="date" name="map[inputDate]" title="" autofocus/></td>
+        </lable>
+        <button type="submit" class="btn btn-primary btn-xs">Търси</button>
+    </form>
+        {{  form_row(form._token) }}  
+
+    <hr>
+    <div class="container body-container">
+            <div class="">
+                {% for field in changes %}
+                <p>
+                    sap: {{field.sapNum  }}
+                    в клетка: {{field.tileCell  }}
+                    записан на: {{ field.updateDate|date('d/m/Y - H:i:s') }}
+{#                    {{ list.nameList|date("d/m/Y - H:i:s") }}#}
+{#                    <a href="{{ path('find_tiles' , {id: field.article.id}) }}" title='Натисни за подробности.'>{{ field.updateDate|date("H:i") }}  -  {{field.article.sapNum}} {{field.article.articleName}}</a>#}
+
+                </p>     
+
+                <hr>
+                {% endfor %}
+            </div>
+
+
+            </div>
+
+
+   
+    </div>
+
+
+
+
+{% endblock %}

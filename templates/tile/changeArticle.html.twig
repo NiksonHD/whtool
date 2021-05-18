@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <body onload="document.getElementById('search_input').focus()">
+
+        <div class="body-content">
+
+            {% if (error) %}
+                <div class="row">
+                    <span class="col-md-offset-5 alert alert-warning" role="alert">{{ error }}</span>
+
+                </div>
+
+            {% endif %}
+
+            <div class="row">
+                {#            {% if (tile) %}#}
+                <p>
+                    CHG клетка: {{ map.tileCell }}
+                </p>
+
+                {% for field in tile%}
+                    <div class="col-md-12">
+
+
+                        <p> 
+                            В момента: 
+
+                            {% if ( field.articleNum )  %} 
+                                {{ field.articleNum }}
+                            {% else %}
+                                {{ 'Празна клетка' }}
+
+                            {% endif %}
+                            {{ field.articleName }}
+
+
+                        </p>
+
+
+
+
+
+
+                        </article>
+                    </div>
+
+                {% endfor %}
+                                        <hr>
+
+                {#            {% endif %}#}
+            </div>
+            {% if (map) %}
+                <form class="form-horizontal" action="{{ path('changeCellFromFind') }}" method="POST">
+                    {% if evaluation.category.name is defined %}
+                        {{evaluation.category.name}}
+                    {% endif %}
+
+                    <table>
+                        <tr>
+                            <th>  </th>
+                            <td>
+                                <input 
+                                    type="hidden" name="map[id]" value="{{ map.id}}"/></td>
+                        </tr>
+                        <tr>
+                            <th>  </th>
+                            <td>
+                                <input  
+                                    type="hidden" name="map[tileCell]" value="{{ map.tileCell }}"/></td>
+                        </tr>
+
+                        <tr>
+                            <th  style="color:blue">ВЪВЕДИ АРТИКУЛ</th>
+                            <td >
+
+                                <input id="search_input" 
+                                       type="text" name="map[sapNum]" /></td>
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                <button type="submit" class="btn btn-primary">НАПРЕД</button>
+                            </td>
+                        </tr>
+                    </table>
+                    {{  form_row(form._token) }}  
+
+
+                </form>
+            {% endif %}
+            <div class="container body-content">
+                <div class="row">
+
+                </div>
+
+
+            </div>
+
+
+        {% endblock %}

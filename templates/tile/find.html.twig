@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <body onload="document.getElementById('search_input').focus()">
+
+    <div class="body-content" >
+        <p>
+        <button onclick="document.location = '{{ path("make_list") }}'" type="button">Направи списък</button>
+        </p>
+        {% if app.user %}
+            <button onclick="document.location = '{{ path("my_searches") }}'" type="button">My searches</button>
+        {% endif %}
+                        <button onclick="document.location = '{{ path("device_searches") }}'" type="button">Device searches</button>
+
+        <form class="form-horizontal" action="{{ path('tile') }}" method="POST">
+            {% if evaluation.category.name is defined %}
+                {{evaluation.category.name}}
+            {% endif %}
+            <table>
+                <tr>
+                <span id="hidden" style="color: red"></span>
+                <th>Списък</th>
+                <input type="hidden" name="lists" value="<?= $cell['lists'] ?>"/>
+                <td><input style="height: 20px; width: 20px" type="checkbox" name="lists" value="1" title="Маркирай тук ако искаш да запазиш търсенето, като лист"/></td>
+                </tr>
+
+                <tr>
+                    <th  style="color:blue">ТЪРСЕНЕ ПЛОЧКИ</th>
+                    <td >
+
+
+                        <input id="search_input" title=" Примери за списъци:
+                               494001.3.494002.12;
+                               494001.494002.494003" type="text" name="tile[articleNum]" />
+                        {% if errors %}
+                            {% for error in errors %}
+                                <small class="exception-message"> {{ error.message }}</small>
+                            {% endfor %}
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <th>Коментар:</th>
+                    <td>
+                        <div>
+                            <input id="search_input" title="Добавянето на име към коментара помага на склада!" type="text" name="comment" /><br>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <button type="submit" class="btn btn-primary btn-xs">Търси</button>
+                    </td>
+                </tr>
+            </table>
+            {{  form_row(form._token) }}  
+
+
+        </form>
+        <div class="">
+            <div class="">
+                {% if(error) %} 
+                    <span class="col-md-offset-5 alert alert-warning" role="alert">{{ error }}</span>
+
+
+                {% endif %}
+                {% if (tiles) %}
+                    {% for tile in tiles%}
+                        <div class="output">
+                            <article>
+                                <header>
+                                    <h2> 
+                                        {% if ( tile.articleNum )  %} 
+                                            Артикул:&nbsp;<a target='_blank' href="https://praktiker.bg/bg/bg/Stolove/TRAPEZEN-STOL-LILOVI-KROS-2-VENGE/p/{{ tile.articleNum }}" > {{ tile.articleNum }} </a>
+                                       {# {% else %}
+                                            {{ 'Невалидни данни за търсене!' }}#}
+
+                                        {% endif %} 
+
+
+
+
+
+
+                                    </h2>
+                                </header>
+
+                                <p>
+                                    {{ tile.articleName }}
+                                </p>
+                                <p>
+                                    EAN: &nbsp;{{ tile.ean}}
+                                </p>
+                                <p>
+                                    наличност: &nbsp;{{ tile.quantity}} бр., актуални към: &nbsp; {{ tile.updateDate|date("d/m/Y - H:i:s")  }}
+                                </p>
+                                <p>клетки:&nbsp; 
+                                    {% if (tile.cells) %}
+
+                                        {% for cell in tile.cells%}
+
+                                            <small>
+                                                <a href="{{ path('changeCellFromFind' ,{cell: cell.tileCell }) }}" title='Последно записване в клетката:{{ cell.updateDate|date("d/m/Y - H:i:s")  }}'>#({{ cell.tileCell }}),</a>
+                                            </small> 
+
+                                        {% endfor %} 
+                                    {% else %}
+                                        <small>
+                                            Няма намерени клетки!
+                                        </small>
+                                    {% endif %}
+                                </p>
+                                <p>
+                                    <a href="{{ path('changeArticleFromFind', {article: tile.articleNum}) }}">ЗАПИШИ В</a>
+                                </p>
+
+
+                                <hr>
+
+
+                            </article>
+                        </div>
+
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+
+        </div>
+
+    </div>
+    <script>
+        document.onreadystatechange = () => {
+            if (document.readyState === 'complete') {
+                document.getElementById('search_input').focus();
+                }
+            };
+    </script>
+
+
+{% endblock %}
