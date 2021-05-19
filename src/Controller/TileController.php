@@ -462,5 +462,44 @@ class TileController extends AbstractController {
         }
 
     }
+    
+    /**
+     *
+     * @Route("last-changes", name="last-changes", methods={"GET"})
+     * 
+     * @return Response 
+     */
+    function showLastCnanges(Request $request){
+          $access = $this->accessService->checkAccess($request->server->get('REMOTE_ADDR'));
+        $date = date('Y-m-d');
+        $map = $this->mapService->findByDate($date);
+        return $this->render('tile/viewChanges.html.twig',
+                        [
+                            'form' => $this->createForm(MapType::class)->createView(),
+                            'access' => $access,
+                            'maps' => $map
+                ]);
+        
+    }
+    /**
+     *
+     * @Route("last-changes", methods={"POST"})
+     * 
+     * @return Response 
+     */
+    public function showLastChangesCustom(Request $request) {
+
+        $access = $this->accessService->checkAccess($request->server->get('REMOTE_ADDR'));
+        $date = $request->request->get('date_search');
+
+        $map = $this->mapService->findByDate($date);
+//        dump($map);exit;
+        return $this->render('tile/viewChanges.html.twig',
+                        [
+                            'form' => $this->createForm(MapType::class)->createView(),
+                            'access' => $access,
+                            'maps' => $map
+        ]);
+    }
 
 }

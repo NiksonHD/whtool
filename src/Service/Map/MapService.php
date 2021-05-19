@@ -99,4 +99,8 @@ class MapService implements MapServiceInterface {
 
     }
 
+    public function findByDate($date) {
+        return $this->mapRepository->findByDate($date);
+    }
+
 }

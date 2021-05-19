@@ -30,12 +30,8 @@ class ListRepository extends \Doctrine\ORM\EntityRepository {
 
         return $this->createQueryBuilder('l')
                         ->select('l')
-                
-//                        ->from('AppBundle:Lists', true)
-//                        ->Where('l.nameList BETWEEN :date AND :last')
                         ->Where('l.nameList like :date')
                         ->setParameter('date', $date)
-//                        ->setParameter('last', $last)
                         ->orderBy('l.nameList', 'desc')
                         ->getQuery()
                         ->getResult();

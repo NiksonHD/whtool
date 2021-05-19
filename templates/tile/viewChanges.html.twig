@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <div class="body-content">
+
+   
+
+    <form class="form-horizontal" action="{{ path('last-changes') }}" method="POST">
+        {% if evaluation.category.name is defined %}
+            {{evaluation.category.name}}
+        {% endif %}
+        <lable>
+            Търсене по дата на лист:
+
+            <input id="search_input" type="date" name="date_search" autofocus/></td>
+        </lable>
+        <button type="submit" class="btn btn-primary btn-xs">Търси</button>
+    </form>
+    <hr>
+    <div class="container body-container">
+        {% for map in maps%}
+            <div class="">
+
+                <p>
+                    {{ map.tileCell }}
+                    <a href="{{ path('tile' ,{sapNum: map.tileCell}) }}" title='Натисни за подробности.'>{{ map.sapNum}}
+                   </a>{{ map.updateDate|date("d/m/Y - H:i:s") }}
+
+                </p>     
+
+                <hr>
+            </div>
+
+
+    {% endfor %}
+            </div>
+
+
+    
+    </div>
+
+
+    {{  form_row(form._token) }}  
+
+
+{% endblock %}

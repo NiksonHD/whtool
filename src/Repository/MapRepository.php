@@ -44,6 +44,18 @@ class MapRepository extends \Doctrine\ORM\EntityRepository
             return false;
         }
     }
+    
+    public function findByDate($date) {
+        $date = '%'.$date. '%';
+
+        return $this->createQueryBuilder('m')
+                        ->select('m')
+                        ->Where('m.updateDate like :date')
+                        ->setParameter('date', $date)
+                        ->orderBy('m.updateDate', 'desc')
+                        ->getQuery()
+                        ->getResult();
+    }
 
     
    

@@ -187,14 +187,7 @@ class ListController extends AbstractController {
     public function findListsDate(Request $request) {
 
         $access = $this->accessService->checkAccess($request->server->get('REMOTE_ADDR'));
-//        $date = $request->query->get('nameList');
-//        $date = new \DateTime('now');
-//        $date->modify('-4 day');
-//        $date = date('Y-m-d');
         $date = date('Y-m-d');
-//         
-
-
         $lists = $this->listsService->getAllByDate($date);
 
         return $this->render('list/view-all.html.twig',
@@ -215,8 +208,6 @@ class ListController extends AbstractController {
 
         $access = $this->accessService->checkAccess($request->server->get('REMOTE_ADDR'));
         $date = $request->request->get('date_search');
-//        $date = date('Y-m-d');
-//         
 
 
         $lists = $this->listsService->getAllByDate($date);

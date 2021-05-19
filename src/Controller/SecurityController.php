@@ -28,11 +28,9 @@ class SecurityController extends AbstractController {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
         $access = $this->accessService->checkAccess($request->server->get('REMOTE_ADDR'));
-//        $access = $this->accessService->checkAccess($request->server->get('REMOTE_ADDR'));
         return $this->render('security/login.html.twig',
                         [
                             'error' => $error,
-//                            'lastUsername' => $lastUsername,
                             'access' => $access
         ]);
     }

@@ -16,4 +16,7 @@ public function findTileAdress(string $sapNum);
 public function updateTileAdress(Map $map);
 
 public function findOneByCell(string $cell);
+
+
+public function findByDate($date);
 }
