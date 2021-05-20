@@ -2,6 +2,7 @@
 
 namespace App\Service\Email;
 
+use App\Entity\Email;
 use App\Repository\EmailRepository;
 
 class EmailService implements EmailServiceInterface {
@@ -16,8 +17,16 @@ class EmailService implements EmailServiceInterface {
     }
 
     public function findAll() {
+    return $this->emailRepository->findBy([], ['id' => 'DESC']);
+    }
 
-        return $this->emailRepository->findAll();
+    public function addEmail(Email $email) {
+        $email->setRole('user');
+        return $this->emailRepository->insert($email);
+    }
+
+    public function deleteEmail(Email $email) {
+        return $this->emailRepository->delete($email);
     }
 
 }

@@ -3,7 +3,6 @@
 {% block body %}
         <div class="body-content">
 
-    {#    <button class="btn btn-default btn-xs" onclick="document.location = {{ path('create_list') }}" type="button">Направи списък</button>#}
     <p>
         <button onclick="document.location = '{{ path("make_list") }}'" type="button">Направи списък</button>
         </p>
@@ -29,7 +28,6 @@
                 <p>
                     <a href="{{ path('view-one' ,{id: list.id}) }}" title='Натисни за подробности.'>{{ list.nameList|date("d/m/Y - H:i:s") }}
                     {{ list.comment }}</a>
-{#                    <a href="{{ path('view-one' ,{id: list.id}) }}" title='Натисни за подробности.'>Подробен</a>#}
 
                 </p>     
 

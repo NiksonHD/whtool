@@ -18,6 +18,29 @@ class EmailRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Email::class);
     }
+    
+    
+      public function insert($email) {
+        try {
+            $this->_em->persist($email);
+            $this->_em->flush();
+            return true;
+        } catch (\Doctrine\ORM\OptimisticLockException $ex) {
+            return false;
+        }
+    }
+    
+    public function delete($email){
+           return   $this->createQueryBuilder('e')
+                ->delete()
+                ->where('e.id= :id' )
+                ->getQuery()
+                ->execute(['id'=> $email->getId()]);
+        
+        
+        
+        
+    }
 
     // /**
     //  * @return Email[] Returns an array of Email objects

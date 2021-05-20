@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\EmailRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=EmailRepository::class)
@@ -18,7 +20,9 @@ class Email
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Не си въвел email!")
+     * @Assert\Email(message="Не е въведен валиден email!")
+     * @ORM\Column(type="string", unique=true, length=255)
      */
     private $address;
     
@@ -27,7 +31,13 @@ class Email
     * @ORM\Column(type="string", length=32, nullable=true)
     */
     private $role;
-    public function getRole() {
+    
+    public function setId($id): self{
+        $this->id = $id;
+        return $this;
+    }
+
+        public function getRole() {
         return $this->role;
     }
 

@@ -8,6 +8,8 @@
 
 namespace App\Service\Email;
 
+use App\Entity\Email;
+
 /**
  *
  * @author nikson
@@ -15,6 +17,10 @@ namespace App\Service\Email;
 interface EmailServiceInterface {
    
     public function findAll();
+    
+    public function addEmail(Email $email);
+    
+    public function deleteEmail(Email $email);
     
     
     

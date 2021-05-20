@@ -121,7 +121,7 @@ class DailyInputs {
         $this->article = $article;
     }
 
-    public function setUserId(integer $userId): void {
+    public function setUserId(int $userId): void {
         $this->userId = $userId;
     }
 
