@@ -279,7 +279,8 @@ class TileController extends AbstractController {
         return $this->render('tile/changeCellMulti.html.twig',
                         [
                             'form' => $this->createForm(MapType::class)->createView(),
-                            'access' => $access
+                            'access' => $access,
+                            'errors' => null
         ]);
     }
 
@@ -295,6 +296,7 @@ class TileController extends AbstractController {
         $form->handleRequest($request);
 
         $tile = new Tile();
+        try{
         $cell = $map->getTileCell();
         $map = $this->mapService->findOneByCell($cell);
 
@@ -306,6 +308,15 @@ class TileController extends AbstractController {
                             'map' => $map,
                             'tile' => null
         ]);
+        } catch (Exception $ex){
+//            dump($ex->getMessage());exit;
+            return $this->render('tile/changeCellMulti.html.twig',
+                        [
+                            'form' => $this->createForm(MapType::class)->createView(),
+                            'access' => $access,
+                            'errors' => $ex->getMessage()
+        ]);
+        }
     }
 
     /**
@@ -343,6 +354,7 @@ class TileController extends AbstractController {
         $form->handleRequest($request);
         $tileTemp = new Tile();
         $tileTemp->setArticleNum($map->getSapNum());
+        try{
         $tile = $this->tileService->findTileInfo($tileTemp);
         $oldCell = $this->mapService->findOneByCell($map->getTileCell());
         $oldSapString = $oldCell->getSapNum();
@@ -356,6 +368,16 @@ class TileController extends AbstractController {
                     'tile' => $tile,
                     'error' => null
         ]);
+        } catch (Exception $ex){
+            return $this->render('tile/changeArticleMulti.html.twig', [
+                    'form' => $this->createForm(MapType::class)->createView(),
+                    'map' => $map,
+                    'access' => $access,
+                    'tile' => null,
+                    'error' => $ex->getMessage()
+        ]);
+            
+        }
     }
 
     /**
