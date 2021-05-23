@@ -43,11 +43,6 @@ class TileService implements TileServiceInterface {
             }
             $tileString = trim($mapObject->getSapNum());
             if ($tileString === 0) {
-//                $tile = new Tile();
-//                $tile->setId(1);
-//                $tile->setSapNum('Празна клетка!!');
-//                $tileArray [] = $tile;
-//                return $tileArray;
                 throw new Exception($articleAdress . " - Празна клетка!");
             }
             $tileString = str_replace('"', '', $tileString);

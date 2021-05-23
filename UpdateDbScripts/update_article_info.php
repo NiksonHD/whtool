@@ -34,14 +34,4 @@ $querie = new SqlQueries($pdo);
 
 
 
-        
-//$db = new \Database\PDODatabase($pdo);
-
-
-
-//$repository = new \App\Repository\Tiles\TileRepository($db, $dataBinder);
-//$encryptionService = new \App\Service\Encryption\ArgonEncryptionService();
-//$tileService = new \App\Service\Tiles\TileService($repository);
-//$userService = new App\Service\UserService($userRepository, $encryptionService);
-//$userHttpHandler = new \App\Http\UserHttpHandler($template, $dataBinder);
-//$tileHttpHandler = new \App\Http\Tiles\TileHttpHandler($template, $dataBinder,$tileService);
+ 

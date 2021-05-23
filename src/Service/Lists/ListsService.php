@@ -59,11 +59,6 @@ class ListsService implements ListsServiceInterface {
                 $list->getSap8() . ' ' . $list->getQ8();
         $sapString = trim($sapString);
         $list->setSapList($sapString);
-        
-//        $this->listsService->create($list);
-//        $lastList = $this->listsService->getLastInsert();
-//        $id = $lastList->getId();
-
 
         return $this->listRepository->insert($list);
         }

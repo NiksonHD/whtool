@@ -29,16 +29,14 @@ class UserService implements UserServiceInterface{
       */
      private $security;
         
-     public function __construct(EncryptionInterface $encryption, UserRepository $userRepository, Security $security) {
+     public function __construct(
+             EncryptionInterface $encryption, 
+             UserRepository $userRepository, 
+             Security $security) {
          $this->encryption = $encryption;
          $this->userRepository = $userRepository;
          $this->security = $security;
      }
-
-     
-    
-    
-    
     
     public function getCurrentUser() {
         return $this->security->getUser();

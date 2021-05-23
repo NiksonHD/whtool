@@ -27,10 +27,7 @@ class DailyService implements DailyServiceInterface {
           array_pop($dailys[$key]);
          $dailys[$key] = $daily[0];
           
-          
       }
-//        $tile = $dailys[0][0]->getArticle();
-//        $tile->setSapNum($dailys['sapNum']);
         
       return  $dailys;
         

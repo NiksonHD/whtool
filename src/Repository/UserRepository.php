@@ -39,19 +39,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function insert(User $user){
         $this->_em->persist($user);
         $this->_em->flush();
-        
-        
-        
-        
-        
-//        try{
-//        $this->_em->persist($user);
-//        $this->_em->flush();
-//        return true;
-//        }catch(OptimisticLockException $ex){
-//            return false;
-//        }
-        
     }
 
     // /**

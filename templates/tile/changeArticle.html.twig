@@ -14,7 +14,6 @@
             {% endif %}
 
             <div class="row">
-                {#            {% if (tile) %}#}
                 <p>
                     CHG клетка: {{ map.tileCell }}
                 </p>
@@ -34,21 +33,14 @@
                             {% endif %}
                             {{ field.articleName }}
 
-
                         </p>
-
-
-
-
-
-
+                        
                         </article>
                     </div>
 
                 {% endfor %}
                                         <hr>
 
-                {#            {% endif %}#}
             </div>
             {% if (map) %}
                 <form class="form-horizontal" action="{{ path('changeCellFromFind') }}" method="POST">
